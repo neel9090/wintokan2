@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Bet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .token-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .token {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .violet { background-color: violet; }
+        .blue { background-color: blue; }
+        .yellow { background-color: yellow; }
+        .token-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+        }
+        #selectedBet {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        form {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        select {
+            padding: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Colorful Bet</h1>
+        <p>Place your bets and win big!</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Select Your Bets:</h2>
+            <div class="token-container">
+                <div class="token red" onclick="showBetOptions('red')"><span class="token-text">Red</span></div>
+                <div class="token green" onclick="showBetOptions('green')"><span class="token-text">Green</span></div>
+                <div class="token violet" onclick="showBetOptions('violet')"><span class="token-text">Violet</span></div>
+            </div>
+            <div class="token-container">
+                <div class="token" onclick="showBetOptions('0')">0</div>
+                <div class="token violet" onclick="showBetOptions('1')">1</div>
+                <div class="token green" onclick="showBetOptions('2')">2</div>
+                <div class="token" onclick="showBetOptions('3')">3</div>
+                <div class="token violet" onclick="showBetOptions('4')">4</div>
+                <div class="token green" onclick="showBetOptions('5')">5</div>
+                <div class="token" onclick="showBetOptions('6')">6</div>
+                <div class="token violet" onclick="showBetOptions('7')">7</div>
+                <div class="token green" onclick="showBetOptions('8')">8</div>
+                <div class="token" onclick="showBetOptions('9')">9</div>
+            </div>
+            <div class="token-container">
+                <div class="token blue" onclick="showBetOptions('big')"><span class="token-text">Big</span></div>
+                <div class="token yellow" onclick="showBetOptions('small')"><span class="token-text">Small</span></div>
+            </div>
+
+            <div id="selectedBet"></div>
+
+            <div>
+                <h2>Betting Options:</h2>
+                <form id="betForm" onsubmit="placeBet(event)">
+                    <label for="amount">Bet Amount:</label>
+                    <select id="amount">
+                        <option value="1">1</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                    </select><br><br>
+                    <input type="submit" value="Place Bet">
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Colorful Bet - All rights reserved.</p>
+    </footer>
+
+    <script>
+        let selectedBet = '';
+
+        function showBetOptions(option) {
+            selectedBet = option;
+            document.getElementById('selectedBet').innerHTML = `<p>You selected: <strong>${option}</strong></p>`;
+            document.getElementById('betForm').style.display = 'block';
+        }
+
+        function placeBet(event) {
+            event.preventDefault();
+            let amount = document.getElementById('amount').value;
+            if (!amount) {
+                alert("Please select a bet amount.");
+                return;
+            }
+            alert(`Bet placed: ${amount} on ${selectedBet}`);
+        }
+    </script>
+</body>
+</html>
